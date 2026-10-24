@@ -103,28 +103,40 @@ document.addEventListener('DOMContentLoaded', () => {
     updateActiveNav();
   }, { passive: true });
 
-  // Mobile Menu Toggle & Morph
-  if (menuToggle && navLinks) {
+  // Mobile Menu Drawer Toggle
+  const mobileMenuDrawer = document.getElementById('mobileMenuDrawer');
+  const mobileNavItems = document.querySelectorAll('.mobile-nav-item');
+
+  if (menuToggle) {
     menuToggle.addEventListener('click', (e) => {
       e.stopPropagation();
-      const isOpen = navLinks.classList.toggle('show');
+      const isOpen = mobileMenuDrawer ? mobileMenuDrawer.classList.toggle('is-open') : false;
       menuToggle.classList.toggle('active', isOpen);
       menuToggle.setAttribute('aria-expanded', String(isOpen));
+      if (mobileMenuDrawer) {
+        mobileMenuDrawer.setAttribute('aria-hidden', String(!isOpen));
+      }
     });
 
-    navItems.forEach(item => {
+    mobileNavItems.forEach(item => {
       item.addEventListener('click', () => {
-        navLinks.classList.remove('show');
+        if (mobileMenuDrawer) {
+          mobileMenuDrawer.classList.remove('is-open');
+          mobileMenuDrawer.setAttribute('aria-hidden', 'true');
+        }
         menuToggle.classList.remove('active');
         menuToggle.setAttribute('aria-expanded', 'false');
       });
     });
 
     document.addEventListener('click', (e) => {
-      if (!navLinks.contains(e.target) && !menuToggle.contains(e.target)) {
-        navLinks.classList.remove('show');
-        menuToggle.classList.remove('active');
-        menuToggle.setAttribute('aria-expanded', 'false');
+      if (mobileMenuDrawer && mobileMenuDrawer.classList.contains('is-open')) {
+        if (!mobileMenuDrawer.contains(e.target) && !menuToggle.contains(e.target)) {
+          mobileMenuDrawer.classList.remove('is-open');
+          mobileMenuDrawer.setAttribute('aria-hidden', 'true');
+          menuToggle.classList.remove('active');
+          menuToggle.setAttribute('aria-expanded', 'false');
+        }
       }
     });
   }
@@ -149,6 +161,10 @@ document.addEventListener('DOMContentLoaded', () => {
       if (isTarget) {
         currentActive = link;
       }
+    });
+
+    mobileNavItems.forEach(link => {
+      link.classList.toggle('active', link.getAttribute('data-nav') === currentId);
     });
 
     if (currentActive && window.innerWidth > 1024) {

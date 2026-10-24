@@ -27,7 +27,7 @@
   <!-- Three.js 3D WebGL Engine -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
-  <link rel="stylesheet" href="style.css?v=2.2">
+  <link rel="stylesheet" href="style.css?v=3.0">
 </head>
 
 <body>
@@ -58,8 +58,8 @@
           </div>
         </a>
 
-        <!-- STREAMLINED LUXURY NAV LINKS DOCK -->
-        <div class="nav-dock-container">
+        <!-- STREAMLINED LUXURY NAV LINKS DOCK (Desktop Only) -->
+        <div class="nav-dock-container nav-desktop-only">
           <!-- MAGNETIC LIQUID ACTIVE CAPSULE -->
           <div class="nav-pill-indicator" id="navPillIndicator" aria-hidden="true"></div>
 
@@ -97,6 +97,20 @@
         <div class="nav-scroll-progress-bar" id="navProgressBar"></div>
       </div>
     </header>
+
+    <!-- MOBILE MENU DRAWER (Dedicated Mobile Navigation) -->
+    <div class="mobile-menu-drawer" id="mobileMenuDrawer" aria-hidden="true">
+      <ul class="mobile-nav-links">
+        <li><a href="#home" class="mobile-nav-item active" data-nav="home">🏠 Home</a></li>
+        <li><a href="#recruiter-corner" class="mobile-nav-item recruiter-highlight" data-nav="recruiter-corner">⚡ Recruiter Brief (30s)</a></li>
+        <li><a href="#about" class="mobile-nav-item" data-nav="about">👤 About Me</a></li>
+        <li><a href="#skills" class="mobile-nav-item" data-nav="skills">🛠️ Technical Skills</a></li>
+        <li><a href="#projects" class="mobile-nav-item" data-nav="projects">🚀 Flagship Projects (4+ Live)</a></li>
+        <li><a href="#sql-cases" class="mobile-nav-item" data-nav="sql-cases">💾 Practical SQL Studies</a></li>
+        <li><a href="#model-eval" class="mobile-nav-item" data-nav="model-eval">📊 Model Evaluation &amp; SHAP</a></li>
+        <li><a href="#contact" class="mobile-nav-item" data-nav="contact">📬 Contact &amp; Connect</a></li>
+      </ul>
+    </div>
   </div>
 
   <!-- MAIN CONTAINER -->
@@ -1731,6 +1745,6 @@ ORDER BY placement_rate_pct DESC;</code></pre>
   <div class="toast-container" id="toastContainer" aria-live="polite"></div>
 
   <!-- MAIN SCRIPT -->
-  <script src="script.js?v=2.2"></script>
+  <script src="script.js?v=3.0"></script>
 </body>
 </html>

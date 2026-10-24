@@ -3031,7 +3031,7 @@ button {
 }
 
 #previewIframe.mobile-mode {
-  width: 390px;
+  width: min(100%, 390px);
   border-left: 1px solid var(--border-line);
   border-right: 1px solid var(--border-line);
 }
@@ -3582,10 +3582,10 @@ button {
    RESPONSIVE DESIGN (SYSTEMATIC MOBILE & TABLET SYSTEM)
    ======================================================== */
 
-/* Fluid container & global mobile safety */
+/* Global Mobile Viewport Safety - Prevents Horizontal Overflow & Zoomout */
 html, body {
   overflow-x: hidden;
-  max-width: 100vw;
+  max-width: 100%;
   width: 100%;
 }
 
@@ -3600,79 +3600,98 @@ pre, code {
   -webkit-overflow-scrolling: touch;
 }
 
-/* TABLET LANDSCAPE & COMPACT LAPTOPS (< 1140px) */
-@media (max-width: 1140px) {
-  .nav-dock-container {
-    display: contents;
-  }
+/* Hide mobile drawer on desktop */
+.mobile-menu-drawer {
+  display: none;
+}
 
-  .nav-pill-indicator {
-    display: none;
+/* TABLET LANDSCAPE & COMPACT SCREENS (< 1024px) */
+@media (max-width: 1024px) {
+  .nav-desktop-only,
+  .nav-dock-container {
+    display: none !important;
   }
 
   .menu-toggle {
-    display: flex;
+    display: flex !important;
   }
 
-  .nav-links {
+  /* Dedicated Mobile Menu Drawer */
+  .mobile-menu-drawer {
+    display: none;
     position: fixed;
-    top: 76px;
-    left: 14px;
-    right: 14px;
+    top: 72px;
+    left: 12px;
+    right: 12px;
     background: rgba(6, 10, 24, 0.98);
     backdrop-filter: blur(28px);
     -webkit-backdrop-filter: blur(28px);
     border: 1px solid rgba(99, 102, 241, 0.35);
     border-radius: 20px;
-    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.92), 0 0 40px rgba(99, 102, 241, 0.15);
-    flex-direction: column;
-    align-items: stretch;
-    padding: 20px 16px;
-    gap: 8px;
-    max-height: calc(85vh - 76px);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.95), 0 0 40px rgba(99, 102, 241, 0.2);
+    padding: 16px;
+    z-index: 2500;
+    max-height: calc(85vh - 72px);
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
-    opacity: 0;
-    transform: translateY(-12px) scale(0.98);
-    pointer-events: none;
-    transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    z-index: 1500;
-    display: flex;
-  }
-
-  .nav-links.show {
-    opacity: 1;
-    transform: translateY(0) scale(1);
     pointer-events: auto;
   }
 
-  .nav-item {
-    text-align: left;
-    padding: 13px 18px;
-    border-radius: var(--radius-md);
-    font-size: 0.96rem;
-    font-weight: 600;
-    color: var(--text-main);
-    border: 1px solid transparent;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  .mobile-menu-drawer.is-open {
+    display: block !important;
+    animation: drawerSlideDown 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  .nav-item:hover, .nav-item.active {
-    background: rgba(99, 102, 241, 0.14);
-    border-color: rgba(99, 102, 241, 0.28);
+  @keyframes drawerSlideDown {
+    from { opacity: 0; transform: translateY(-10px) scale(0.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  .mobile-nav-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .mobile-nav-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    border-radius: var(--radius-md);
+    font-size: 0.94rem;
+    font-weight: 600;
+    color: var(--text-main);
+    text-decoration: none;
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+  }
+
+  .mobile-nav-item:hover,
+  .mobile-nav-item.active {
+    background: rgba(99, 102, 241, 0.16);
+    border-color: rgba(99, 102, 241, 0.35);
     color: #fff;
+  }
+
+  .mobile-nav-item.recruiter-highlight {
+    color: var(--amber);
   }
 }
 
 /* TABLETS (< 980px) */
 @media (max-width: 980px) {
+  .pointer-spotlight,
+  .data-constellation-canvas,
+  .ambient-glow {
+    display: none !important;
+  }
+
   .hero {
     grid-template-columns: 1fr;
-    gap: 36px;
-    padding-top: 100px;
-    padding-bottom: 50px;
+    gap: 32px;
+    padding-top: 96px;
+    padding-bottom: 48px;
     text-align: center;
   }
 
@@ -3692,7 +3711,7 @@ pre, code {
   }
 
   .hero-image-frame {
-    width: min(100%, 300px);
+    width: min(100%, 280px);
     margin: 0 auto;
   }
 
@@ -3728,23 +3747,26 @@ pre, code {
 @media (max-width: 768px) {
   .page-container {
     padding: 0 16px;
+    width: 100%;
+    max-width: 100%;
   }
 
   .section {
-    padding: 56px 0;
+    padding: 50px 0;
   }
 
   .section-header {
-    margin-bottom: 30px;
+    margin-bottom: 26px;
   }
 
   .section-title {
-    font-size: clamp(1.65rem, 6.5vw, 2.2rem);
+    font-size: clamp(1.6rem, 6.5vw, 2.1rem);
     letter-spacing: -0.02em;
   }
 
   .section-subtitle {
-    font-size: 0.92rem;
+    font-size: 0.9rem;
+    line-height: 1.55;
   }
 
   /* Fixed Mobile Navbar */
@@ -3782,13 +3804,9 @@ pre, code {
     height: 36px;
   }
 
-  .pointer-spotlight {
-    display: none;
-  }
-
   /* Hero Section on Mobile */
   .hero-headline {
-    font-size: clamp(2rem, 8vw, 2.7rem);
+    font-size: clamp(1.9rem, 8vw, 2.6rem);
     letter-spacing: -0.02em;
   }
 
@@ -3798,7 +3816,7 @@ pre, code {
   }
 
   .hero-bio {
-    font-size: 0.9rem;
+    font-size: 0.88rem;
     line-height: 1.6;
   }
 
@@ -3866,7 +3884,7 @@ pre, code {
 
   /* Floating Badges on Photo on Mobile */
   .floating-badge {
-    display: none;
+    display: none !important;
   }
 
   /* Recruiter Corner on Mobile */
@@ -3930,12 +3948,13 @@ pre, code {
     border-radius: var(--radius-md);
   }
 
-  .project-card-actions {
+  .project-action-row {
     flex-direction: column;
     gap: 8px;
+    width: 100%;
   }
 
-  .project-card-actions .btn {
+  .project-action-row .btn {
     width: 100%;
     justify-content: center;
   }
@@ -3952,7 +3971,7 @@ pre, code {
   }
 
   .code-block-container pre {
-    font-size: 0.76rem;
+    font-size: 0.74rem;
     padding: 10px 12px;
   }
 
@@ -3978,12 +3997,12 @@ pre, code {
 
   .contact-channels-grid {
     grid-template-columns: 1fr;
-    gap: 12px;
+    gap: 10px;
   }
 
   /* Footer on Mobile */
   .footer {
-    padding: 50px 0 24px;
+    padding: 48px 0 24px;
   }
 
   .footer-cta-card {
