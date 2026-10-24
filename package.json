@@ -2,11 +2,9 @@
   "name": "abhay-raj-portfolio",
   "version": "3.0.0",
   "description": "World-Class Data Analyst & AI/ML Developer Portfolio of Abhay Raj",
-  "main": "index.html",
   "scripts": {
-    "dev": "npx serve . -p 3000",
-    "start": "npx serve . -p 3000",
-    "deploy": "npx vercel --prod"
+    "build": "echo 'Static build ready'",
+    "start": "npx serve ."
   },
   "keywords": [
     "data-analyst",
