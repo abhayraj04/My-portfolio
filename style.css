@@ -526,8 +526,11 @@ button {
 /* Hero Open to Work Floating Banner */
 .hero-open-to-work-banner {
   display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: center;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
+  max-width: 100%;
   background: rgba(16, 185, 129, 0.08);
   border: 1px solid rgba(16, 185, 129, 0.32);
   border-radius: var(--radius-full);
@@ -535,6 +538,7 @@ button {
   margin-bottom: 14px;
   backdrop-filter: blur(8px);
   animation: pulseGreenGlow 3s infinite ease-in-out;
+  text-align: center;
 }
 
 @keyframes pulseGreenGlow {
@@ -588,9 +592,12 @@ button {
 
 .hero-badge {
   display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: center;
   align-items: center;
-  gap: 10px;
-  padding: 6px 15px;
+  gap: 8px;
+  max-width: 100%;
+  padding: 6px 14px;
   border-radius: var(--radius-full);
   background: rgba(16, 185, 129, 0.08);
   border: 1px solid rgba(16, 185, 129, 0.28);
@@ -598,6 +605,7 @@ button {
   font-size: 0.82rem;
   font-weight: 600;
   margin-bottom: 20px;
+  text-align: center;
 }
 
 .badge-status-dot {
